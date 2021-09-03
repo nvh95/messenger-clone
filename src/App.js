@@ -1,14 +1,19 @@
 import './App.css';
 import styled from 'styled-components';
 
-const COLORS = {
-  GRAY: '#f5f5f5',
-  PRIMARY: '#0084ff',
-};
+import { ReactComponent as PlusMore } from 'assets/svg/plus-more.svg';
+import { ReactComponent as AddImage } from 'assets/svg/add-image.svg';
+import { ReactComponent as AddStickers } from 'assets/svg/add-stickers.svg';
+import { ReactComponent as AddGIF } from 'assets/svg/add-gif.svg';
+import { ReactComponent as AddEmoji } from 'assets/svg/add-emoji.svg';
+import selfImage from 'assets/images/self.jpg';
+import ronaldoImage from 'assets/images/ronaldo.png';
 
-const MessageType = {
-  SENDER: 'SENDER',
-  RECEIVER: 'RECEIVER',
+const COLORS = {
+  GRAY: 'hsl(0, 0%, 96%)',
+  GRAY_DARK: 'hsl(0, 0%, 20%)',
+  PRIMARY: '#0084ff',
+  GREEN: '#5ad539'
 };
 
 const CONTACT_LIST = Array.from(Array(30).keys()).map(index => {
@@ -28,7 +33,7 @@ function App() {
           <SelfAvatarWrapper>
             <Avatar
               size={40}
-              src="https://scontent.fhan3-2.fna.fbcdn.net/v/t1.6435-1/p100x100/80362123_10212573949542746_445906919169720320_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=7206a8&_nc_ohc=5B22sD8uS5EAX8mH5Fx&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fhan3-2.fna&oh=c36ef09462d19a4851f94a3b2ad58d5e&oe=615659D9"
+              src={selfImage}
             />
           </SelfAvatarWrapper>
 
@@ -52,44 +57,138 @@ function App() {
             return (
               <Contact key={contact.id}>
                 <Avatar
-                  size={40}
-                  src="https://scontent.fhan3-2.fna.fbcdn.net/v/t1.6435-1/p100x100/80362123_10212573949542746_445906919169720320_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=7206a8&_nc_ohc=5B22sD8uS5EAX8mH5Fx&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fhan3-2.fna&oh=c36ef09462d19a4851f94a3b2ad58d5e&oe=615659D9"
+                  size={55}
+                  src={`https://icotar.com/avatar/${contact.id}`}
                 />
                 <ContactInforWrarpper>
                   <ContactName>{contact.name}</ContactName>
-                  <ContactMessage>{contact.message}</ContactMessage>
+                  <ContacMessageWrapper>
+                    <ContactMessage>
+                      {contact.message}
+                    </ContactMessage>
+                    <LastSeen>
+                      1h
+                    </LastSeen>
+                  </ContacMessageWrapper>
                 </ContactInforWrarpper>
+
               </Contact>
             )
           })}
         </ChatList>
       </Sidebar>
-      <Conversation>
-        {Array.from(Array(100).keys()).map((index) => {
-          if (index % 2) {
+      <ConversationWrapper>
+        <ConversationHeader>
+          <RelativeWrapper>
+            <Avatar
+              size={40}
+              src={ronaldoImage}
+            />
+            <ActiveDot />
+          </RelativeWrapper>
+          <ReceiverInfo>
+            <ReceiverName href="https://www.facebook.com/Cristiano">Ronaldo</ReceiverName>
+            <LastSeen>Active 1h ago</LastSeen>
+          </ReceiverInfo>
+          <FunctionButtons>
+            <Button>
+              📞
+            </Button>
+            <Button>🎥</Button>
+            <Button>
+              <MoreActions>
+                ...
+              </MoreActions>
+            </Button>
+          </FunctionButtons>
+        </ConversationHeader>
+        <ConversationBody>
+          <div style={{marginTop:'auto'}}></div>
+          {Array.from(Array(30).keys()).map((index) => {
+            if (!(index % 2)) {
+              return (
+                <SenderChatMessage
+                  key={index}
+                >
+                  {`This is message ${index + 1}`}
+                </SenderChatMessage>
+              )
+            }
             return (
-              <SenderChatMessage
+              <ReceiverChatMessage
                 key={index}
-                type={MessageType.SENDER}
               >
                 {`This is message ${index + 1}`}
-              </SenderChatMessage>
+              </ReceiverChatMessage>
             )
           }
-          return (
-            <ReceiverChatMessage
-              key={index}
-              type={MessageType.RECEIVER}
-            >
-              {`This is message ${index + 1}`}
-            </ReceiverChatMessage>
-          )
-        }
-        )}
-      </Conversation>
-      <Information>
-        Information
-      </Information>
+          )}
+        </ConversationBody>
+        <ComposerWrapper>
+          <IconWrapper>
+            <PlusMore />
+          </IconWrapper>
+          <IconWrapper>
+            <AddImage />
+          </IconWrapper>
+          <IconWrapper>
+            <AddStickers />
+          </IconWrapper>
+          <IconWrapper>
+            <AddGIF />
+
+          </IconWrapper>
+          <ComposerInputWrapper>
+            <ComposerInput
+              placeholder="Aa"
+            />
+            <IconWrapper>
+              <AddEmoji />
+            </IconWrapper>
+          </ComposerInputWrapper>
+          <EmojiWrapper>👍</EmojiWrapper>
+        </ComposerWrapper>
+      </ConversationWrapper>
+      <ChatDetailWrapper>
+        <ReceiverDetails>
+          <Avatar
+            size={80}
+            src={ronaldoImage}
+          />
+          <ReceiverName>Ronaldo</ReceiverName>
+          <LastSeen>Active 1h ago</LastSeen>
+          <CollapsableWrapper>
+            {/* TODO: can we name following component better? */}
+            <CollapsableTextWrapper>
+              <CollapsableText>
+                Customize Chat
+              </CollapsableText>
+              <CollapseIcon>^</CollapseIcon>
+            </CollapsableTextWrapper>
+            
+            <CollapsableTextWrapper>
+              <CollapsableText>
+                Privacy & Support
+              </CollapsableText>
+              <CollapseIcon>^</CollapseIcon>
+            </CollapsableTextWrapper>
+
+            <CollapsableTextWrapper>
+              <CollapsableText>
+                Shared Files
+              </CollapsableText>
+              <CollapseIcon>^</CollapseIcon>
+            </CollapsableTextWrapper>
+
+            <CollapsableTextWrapper>
+              <CollapsableText>
+                Shared Media
+              </CollapsableText>
+              <CollapseIcon>^</CollapseIcon>
+            </CollapsableTextWrapper>
+          </CollapsableWrapper>
+        </ReceiverDetails>
+      </ChatDetailWrapper>
     </Wrapper>
   );
 }
@@ -102,7 +201,8 @@ const Wrapper = styled.div`
 
 const Sidebar = styled.div`
   border: 1px solid ${COLORS.GRAY};
-  flex: 0 1 360px;
+  flex: 0 5 360px;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
 `
@@ -120,7 +220,9 @@ const SelfAvatarWrapper = styled.div`
 `
 
 const Avatar = styled.img`
+  object-fit: cover;
   border-radius: 50%;
+  border: 1px solid ${COLORS.GRAY};
   width: ${props => `${props.size}px` || '40px'};
   height: ${props => `${props.size}px` || '40px'};
 `
@@ -159,37 +261,146 @@ const SearchMessenger = styled.div`
   margin: 0 16px;
 `
 
-const SearchInput = styled.input`
+const Input = styled.input`
   border: 0;
   background-color: ${COLORS.GRAY};
   outline: none;
+`
+
+const SearchInput = styled(Input)`
   flex: 1;
 `
 
 const ChatList = styled.div`
-
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  margin-top: 16px;
+  padding-top: 0;
 `
 
 const Contact = styled.div`
   display: flex;
   gap: 8px;
+  align-items: center;
+  padding: 8px 4px;
+  border-radius: 16px;
+  cursor: pointer;
+  :hover {
+    background-color: ${COLORS.GRAY};
+  }
 `
 const ContactInforWrarpper = styled.div`
+  overflow: hidden;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
 `
+
 const ContactName = styled.div`
 `
-const ContactMessage = styled.div`
+
+const ContacMessageWrapper = styled.div`
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
 `
 
+const ContactMessage = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: ${COLORS.GRAY_DARK};
+  font-size: 0.8rem;
+`
 
-const Conversation = styled.div`
+const LastSeen = styled.div`
+  font-size: 0.8rem;
+  color: ${COLORS.GRAY_DARK};
+`
+
+const ConversationWrapper = styled.div`
   border: 1px solid ${COLORS.GRAY};
   flex: 1 1 500px;
-  overflow: auto;
   display: flex;
   flex-direction: column;
   padding: 8px;
   gap: 8px;
+`
+
+const ConversationHeader = styled.div`
+  display: flex;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid ${COLORS.GRAY};
+  box-shadow: 0px 3px 4px ${COLORS.GRAY};
+`
+const RelativeWrapper = styled.div`
+  position: relative;
+`
+
+const ActiveDot = styled.div`
+  width: 14px;
+  height: 14px;
+  background-color: ${COLORS.GREEN};
+  border-radius: 50%;
+  border: 2px solid white;
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+`
+
+const ReceiverInfo = styled.div`
+  padding: 0 8px;
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+`
+
+const ReceiverName = styled.a`
+  font-weight: 600;
+  color: black;
+  text-decoration: none;
+`
+
+const ComposerWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+`
+
+const ComposerInputWrapper = styled.div`
+  padding: 4px 8px;
+  border-radius: 32px;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  background-color: ${COLORS.GRAY};
+`
+
+const ComposerInput = styled(Input)`
+
+`
+
+const IconWrapper = styled.div`
+  cursor: pointer;
+`;
+
+const EmojiWrapper = styled(IconWrapper)`
+  font-size: 1.5rem;
+`
+
+const ConversationBody = styled.div`
+  overflow: auto;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: aut;
+  flex-direction: column;
+  flex: 1 1 700px;
+  padding: 8px;
+  gap: 8px;
+  white-space: nowrap;
 `
 
 const ChatMessage = styled.div`
@@ -208,9 +419,51 @@ const ReceiverChatMessage = styled(ChatMessage)`
   align-self: flex-start;
 `
 
-const Information = styled.div`
+const ChatDetailWrapper = styled.div`
   border: 1px solid ${COLORS.GRAY};
   flex: 0 2 380px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 8px;
+  overflow: auto;
+
+  @media ${props => props.theme.queries.tabletAndDown} {
+    display: none;
+  }
+`
+
+const ReceiverDetails = styled.div`
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+`
+
+const CollapsableWrapper = styled.div`
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+`
+
+const CollapsableTextWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 16px 8px;
+  border-radius: 16px;
+  &:hover {
+    background-color: ${COLORS.GRAY};
+  }
+`
+const CollapsableText = styled.div`
+  font-weight: 500;
+`
+const CollapseIcon = styled.div`
+  font-weight: 800;
+  margin-top: 2px;
+  transform: scale(-1, -1);
+  color: ${COLORS.GRAY_DARK};
 `
 
 export default App;
