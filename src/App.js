@@ -210,13 +210,20 @@ const Sidebar = styled.div`
   max-width: 360px;
   display: flex;
   flex-direction: column;
+  padding: 16px 16px 0;
+  @media ${props => props.theme.queries.phone} {
+    flex-basis: 0px;
+  }
 `
 
 const Header = styled.div`
-  padding: 16px;
   display: flex;
   gap: 16px;
   align-items: center;
+  padding-bottom: 16px;
+  @media ${props => props.theme.queries.phone} {
+    display: none;
+  }
 `
 
 const AvatarImg = styled.img`
@@ -259,13 +266,13 @@ const SearchMessenger = styled.div`
   display: flex;
   gap: 16px;
   padding: 8px 16px;
-  margin: 0 16px;
 `
 
 const Input = styled.input`
   border: 0;
   background-color: ${COLORS.GRAY};
   outline: none;
+  width: 100%;
 `
 
 const SearchInput = styled(Input)`
@@ -276,7 +283,6 @@ const ChatList = styled.div`
   overflow: auto;
   display: flex;
   flex-direction: column;
-  padding: 16px;
   margin-top: 16px;
   padding-top: 0;
 `
@@ -297,6 +303,9 @@ const ContactInforWrarpper = styled.div`
   display: flex;
   gap: 5px;
   flex-direction: column;
+  @media ${props => props.theme.queries.phone} {
+    display: none;
+  }
 `
 
 const ContactName = styled.div`
