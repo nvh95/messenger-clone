@@ -417,6 +417,9 @@ const ConversationBody = styled.div`
 const ChatMessage = styled.div`
   padding: 16px;
   border-radius: 32px;
+  max-width: calc(100% - 42px);
+  word-wrap: break-word;
+  white-space: pre-wrap;
 `
 
 const SenderChatMessage = styled(ChatMessage)`
