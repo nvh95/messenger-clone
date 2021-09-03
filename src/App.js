@@ -341,6 +341,7 @@ const ConversationWrapper = styled.div`
 
 const ConversationHeader = styled.div`
   display: flex;
+  align-items: center;
   gap: 8px;
   padding: 8px 0;
   border-bottom: 1px solid ${COLORS.GRAY};
