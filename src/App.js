@@ -201,7 +201,7 @@ function App() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 100%;
 `
 
 const Sidebar = styled.div`
