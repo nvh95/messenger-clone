@@ -380,7 +380,7 @@ const ComposerInputWrapper = styled.div`
 `
 
 const ComposerInput = styled(Input)`
-
+  flex: 1;
 `
 
 const IconWrapper = styled.div`
