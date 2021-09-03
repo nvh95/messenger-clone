@@ -92,7 +92,7 @@ function App() {
             <ActiveDot />
           </RelativeWrapper>
           <ReceiverInfo>
-            <ReceiverName href="https://www.facebook.com/Cristiano">Ronaldo</ReceiverName>
+            <ReceiverName href="https://www.facebook.com/Cristiano" target="_blank" rel="noopener noreferrer">Ronaldo</ReceiverName>
             <LastSeen>Active 1h ago</LastSeen>
           </ReceiverInfo>
           <FunctionButtons>
@@ -160,7 +160,7 @@ function App() {
             size={80}
             src={ronaldoImage}
           />
-          <ReceiverName>Ronaldo</ReceiverName>
+          <ReceiverName href="https://www.facebook.com/Cristiano" target="_blank" rel="noopener noreferrer">Ronaldo</ReceiverName>
           <LastSeen>Active 1h ago</LastSeen>
           <CollapsableWrapper>
             {/* TODO: can we name following component better? */}
@@ -244,6 +244,7 @@ const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `
 
 const MoreActions = styled.div`
