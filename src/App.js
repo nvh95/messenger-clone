@@ -24,18 +24,23 @@ const CONTACT_LIST = Array.from(Array(30).keys()).map(index => {
   }
 })
 
+function Avatar({ src, size }) {
+  return (
+    <div>
+      <AvatarImg src={src} size={size} />
+    </div>
+  )
+}
 
 function App() {
   return (
     <Wrapper>
       <Sidebar>
         <Header>
-          <SelfAvatarWrapper>
-            <Avatar
-              size={40}
-              src={selfImage}
-            />
-          </SelfAvatarWrapper>
+          <Avatar
+            size={40}
+            src={selfImage}
+          />
 
           <AppName>Chats</AppName>
           <FunctionButtons>
@@ -103,7 +108,7 @@ function App() {
           </FunctionButtons>
         </ConversationHeader>
         <ConversationBody>
-          <div style={{marginTop:'auto'}}></div>
+          <div style={{ marginTop: 'auto' }}></div>
           {Array.from(Array(30).keys()).map((index) => {
             if (!(index % 2)) {
               return (
@@ -165,7 +170,7 @@ function App() {
               </CollapsableText>
               <CollapseIcon>^</CollapseIcon>
             </CollapsableTextWrapper>
-            
+
             <CollapsableTextWrapper>
               <CollapsableText>
                 Privacy & Support
@@ -214,12 +219,7 @@ const Header = styled.div`
   align-items: center;
 `
 
-const SelfAvatarWrapper = styled.div`
-  /* width: 40px;
-  height: 40px; */
-`
-
-const Avatar = styled.img`
+const AvatarImg = styled.img`
   object-fit: cover;
   border-radius: 50%;
   border: 1px solid ${COLORS.GRAY};
